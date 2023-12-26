@@ -6,10 +6,11 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.stage.Stage
 import org.springframework.boot.runApplication
+import org.springframework.context.ConfigurableApplicationContext
 
 class JavaFxStarter : Application() {
 
-    private val springContext = runApplication<SpringFxApplication>()
+    private val springContext: ConfigurableApplicationContext = runApplication<SpringFxApplication>()
 
     override fun start(stage: Stage) {
         val resource = JavaFxStarter::class.java.getResource("/javafx/hello-view.fxml")
@@ -23,10 +24,8 @@ class JavaFxStarter : Application() {
         springContext.close()
         Platform.exit()
     }
+}
 
-    companion object {
-        @JvmStatic fun main(args: Array<String>) {
-            launch(*args)
-        }
-    }
+fun main() {
+    Application.launch(JavaFxStarter::class.java)
 }
